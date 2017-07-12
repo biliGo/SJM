@@ -3,8 +3,8 @@ package guo.com.sjm.controller;
 import cn.huoqiu.base.db.Pagination;
 import cn.huoqiu.base.util.JsonResponse;
 import cn.huoqiu.base.web.BaseController;
-import guo.com.sjm.entity.Test;
-import guo.com.sjm.service.TestService;
+import guo.com.sjm.entity.User;
+import guo.com.sjm.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,65 +16,64 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/tests")
-public class TestController extends BaseController {
+@RequestMapping("/users")
+public class UserController extends BaseController {
 
     @Inject
-    private TestService testService;
+    private UserService userService;
 
-    @ModelAttribute("test")
-    public Test initTest() {
-        return new Test();
+    @ModelAttribute("user")
+    public User initUser() {
+        return new User();
     }
 
     @RequestMapping(method = RequestMethod.GET)
     public String index(HttpServletRequest request, Model model) {
-        Pagination<Test> tests = testService.search(getQueryForm(request));
-        model.addAttribute("tests", tests);
-        return "tests/index";
+        Pagination<User> users = userService.search(getQueryForm(request));
+        model.addAttribute("users", users);
+        return "users/index";
     }
 
     // new是关键字，用new0代替。
     @RequestMapping(value = "new", method = RequestMethod.GET)
     public String new0(Model model) {
-        return "tests/new";
+        return "users/new";
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String create(@Valid Test test, BindingResult result, Model model,
+    public String create(@Valid User user, BindingResult result, Model model,
                          RedirectAttributes redirectAttrs) {
-        model.addAttribute("test", test);
+        model.addAttribute("user", user);
         if (result.hasErrors()) {
-            return "tests/new";
+            return "users/new";
         }
 
-        testService.create(test);
+        userService.create(user);
         redirectAttrs.addFlashAttribute("message", "创建成功!");
-        return "redirect:/tests/" + test.getId();
+        return "redirect:/users/" + user.getId();
     }
 
     @RequestMapping(value = "/{id:^\\d+$}", method = RequestMethod.GET)
     public String show(@PathVariable("id") Long id, Model model) {
-        Test test = testService.findById(id);
-        model.addAttribute("test", test);
-        return "tests/show";
+        User user = userService.findById(id);
+        model.addAttribute("user", user);
+        return "users/show";
     }
 
     @RequestMapping(value = "/{id:^\\d+$}/edit", method = RequestMethod.GET)
     public String edit(@PathVariable("id") Long id, Model model) {
-        Test test = testService.findById(id);
-        model.addAttribute("test", test);
-        return "tests/edit";
+        User user = userService.findById(id);
+        model.addAttribute("user", user);
+        return "users/edit";
     }
-
 
     @RequestMapping(value = "/{id:^\\d+$}", method = RequestMethod.DELETE)
     public
     @ResponseBody
     JsonResponse destroy(@PathVariable("id") Long id,
                          RedirectAttributes redirectAttrs) {
-        Test test = testService.findById(id);
-        testService.destroy(test);
+        User user = userService.findById(id);
+        userService.destroy(user);
         String message = "删除成功!";
         redirectAttrs.addFlashAttribute("message", message);
 

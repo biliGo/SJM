@@ -1,66 +1,51 @@
 package guo.com.sjm.entity;
 
-import java.sql.Timestamp;
+import com.google.common.base.MoreObjects;
+
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Date;
 
-/**
- * Test entity. @author MyEclipse Persistence Tools
- */
-@Entity
-@Table(name = "test", catalog = "test")
-public class Test implements java.io.Serializable {
+@Table
+public class Test {
 
-	// Fields
+    @Id
+    private Integer id;
 
-	private Integer id;
-	private String name;
-	private Timestamp time;
+    @Column
+    private String name;
 
-	// Constructors
+    @Column
+    private Date time;
 
-	/** default constructor */
-	public Test() {
-	}
+    public Integer getId() {
+        return this.id;
+    }
 
-	/** full constructor */
-	public Test(String name, Timestamp time) {
-		this.name = name;
-		this.time = time;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	// Property accessors
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "id", unique = true, nullable = false)
-	public Integer getId() {
-		return this.id;
-	}
+    public String getName() {
+        return this.name;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	@Column(name = "name")
-	public String getName() {
-		return this.name;
-	}
+    public Date getTime() {
+        return this.time;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setTime(Date time) {
+        this.time = time;
+    }
 
-	@Column(name = "time", length = 19)
-	public Timestamp getTime() {
-		return this.time;
-	}
-
-	public void setTime(Timestamp time) {
-		this.time = time;
-	}
-
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this).add("id", id).add("name", name)
+                .add("time", time).toString();
+    }
 }
