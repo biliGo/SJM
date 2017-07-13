@@ -2,6 +2,7 @@ package com.huoqiu.service;
 
 import javax.inject.Inject;
 
+import com.huoqiu.entity.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -13,12 +14,16 @@ import cn.huoqiu.base.db.Query;
 import com.huoqiu.entity.UserContact;
 import cn.huoqiu.base.web.QueryForm;
 
+import java.util.List;
+
 @Service
 public class UserContactService {
 	private Logger logger = LoggerFactory.getLogger(UserContactService.class);
 
 	@Inject
 	private DB db;
+
+
 
 	@Transactional
 	public Pagination<UserContact> search(QueryForm qf) {
