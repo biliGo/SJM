@@ -8,11 +8,11 @@
     <h3>${table.Label}查询</h3>
   </div>
   <div class="pull-right">
-    <a class="btn btn-primary" href="<c:url value="/stus/new"/>">创建${table.Label}</a>
+    <a class="btn btn-primary" href="<c:url value="/user_contacts/new"/>">创建${table.Label}</a>
   </div>
 </div>
 <div class="row-fluid">
-<form:form action="/stus" method="GET"
+<form:form action="/user_contacts" method="GET"
 	modelAttribute="qf" cssClass="basic-form form-horizontal">
 	<div class="control-group">
 		<div class="controls">
@@ -21,11 +21,12 @@
 	</div>
 </form:form>
 </div>
-<display:table name="stus.data" id="stu_" class="table table-striped table-bordered">
+<display:table name="userContacts.data" id="userContact_" class="table table-striped table-bordered">
 	<display:column title="ID">
-		<a href="/stus/${stu_.id}">${stu_.id}</a>
+		<a href="/user_contacts/${userContact_.id}">${userContact_.id}</a>
 	</display:column>
+	<display:column property="createdAt" title="创建时间" />
 </display:table>
-<b:pagination name="stus" />
+<b:pagination name="userContacts" />
 
 <jsp:include page="/WEB-INF/views/layouts/footer.jsp"/>
