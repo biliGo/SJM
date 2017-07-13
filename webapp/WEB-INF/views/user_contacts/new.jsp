@@ -3,8 +3,8 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <h3>添加${table.Label}</h3>
-<form:form action="/stus" method="POST" validate="true"
-	modelAttribute="stu" cssClass="basic-form form-horizontal">
+<form:form action="/user_contacts" method="POST" validate="true"
+	modelAttribute="userContact" cssClass="basic-form form-horizontal">
 	<div class="control-group">
 		<div class="controls">
 			<button type="submit" class="btn">提交</button>
