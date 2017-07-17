@@ -6,3 +6,4 @@ SJM.iml
 .project
 target/
 logs/
+.DS_Store
